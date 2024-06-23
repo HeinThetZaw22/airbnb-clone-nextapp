@@ -32,6 +32,7 @@ const Modal = ({
   }, [disabled, onClose]);
 
   const handleSubmit = useCallback(() => {
+    // console.log("handlesubmit clicked");
     if (disabled) {
       return;
     }
@@ -84,7 +85,8 @@ const Modal = ({
                 <div className="text-lg font-semibold">{title}</div>
               </div>
               {/* body  */}
-              <div className="flex-auto p-6 relative">{body}</div>
+              {/* flex-auto removed  */}
+              <div className=" p-6 relative">{body}</div>
               {/* footer  */}
               <div className="flex flex-col gap-2 p-6">
                 <div className="flex flex-row items-center w-full gap-4">
@@ -92,7 +94,7 @@ const Modal = ({
                     <Button
                       outline
                       disabled={disabled}
-                      onClick={handleSubmit}
+                      onClick={handleSecondaryAction}
                       label={secondaryActionLabel}
                     />
                   )}
@@ -103,6 +105,7 @@ const Modal = ({
                     label={actionLabel}
                   />
                 </div>
+                {footer}
               </div>
             </div>
           </div>

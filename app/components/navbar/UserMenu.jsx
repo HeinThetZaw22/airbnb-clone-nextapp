@@ -4,10 +4,17 @@ import Avator from "../Avator";
 import { useCallback, useRef, useState, useEffect } from "react";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
-const UserMenu = () => {
-  const registerModel = useRegisterModal();
+import useLoginModal from "@/app/hooks/useLoginModal";
+import { signOut } from "next-auth/react";
+import useRentModal from "@/app/hooks/useRentModal";
+
+const UserMenu = ({ currentUser }) => {
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+  const rentModal = useRentModal();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
+
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
@@ -22,11 +29,18 @@ const UserMenu = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      registerModal.onOpen();
+    } else {
+      rentModal.onOpen();
+    }
+  }, [registerModal, rentModal, currentUser]);
   return (
     <div className=" relative" ref={menuRef}>
       <div className=" flex flex-row items-center gap-2">
         <div
-          onClick={() => {}}
+          onClick={onRent}
           className="hidden md:block 
             text-sm font-semibold cursor-pointer
              hover:bg-neutral-100 rounded-full px-4 py-3"
@@ -47,10 +61,24 @@ const UserMenu = () => {
         {isOpen && (
           <div className=" absolute top-12 right-0 bg-white overflow-hidden rounded-xl w-[40vw] md:w-3/4 shadow-md text-sm">
             <div className="flex flex-col cursor-pointer">
-              <>
-                <MenuItem onClick={() => {}} label="Sign In" />
-                <MenuItem onClick={registerModel.onOpen} label="Sign Up" />
-              </>
+              {currentUser ? (
+                <>
+                  <MenuItem onClick={() => {}} label="My trips" />
+                  <MenuItem onClick={() => {}} label="My favourites" />
+                  <MenuItem onClick={() => {}} label="My properties" />
+                  <MenuItem onClick={() => {}} label="My reservations" />
+                  <MenuItem
+                    onClick={rentModal.onOpen}
+                    label="Airbnb your home"
+                  />
+                  <MenuItem onClick={() => signOut()} label="Logout" />
+                </>
+              ) : (
+                <>
+                  <MenuItem onClick={loginModal.onOpen} label="Login In" />
+                  <MenuItem onClick={registerModal.onOpen} label="Sign Up" />
+                </>
+              )}
             </div>
           </div>
         )}
