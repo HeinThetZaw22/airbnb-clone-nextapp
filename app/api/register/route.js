@@ -1,5 +1,5 @@
-import { connectToDB } from "@/lib/database";
-import User from "@/models/user";
+import { connectToDB } from "../../../lib/database";
+import User from "../../../models/user";
 import bcrypt from "bcryptjs";
 const { NextResponse } = require("next/server");
 

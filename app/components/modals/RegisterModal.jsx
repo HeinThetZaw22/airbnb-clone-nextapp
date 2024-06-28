@@ -1,7 +1,7 @@
 "use client";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRegisterModal from "../../../app/hooks/useRegisterModal";
 import { useState } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import Modal from "./Modal";
@@ -10,7 +10,7 @@ import Input from "../inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
 import { signIn } from "next-auth/react";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useLoginModal from "../../../app/hooks/useLoginModal";
 
 const RegisterModal = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -54,6 +54,7 @@ const RegisterModal = () => {
         body: JSON.stringify(data),
       });
       if (res.ok) {
+        toast.success("Registed successfully");
         console.log("successfully registered");
         registerModal.onClose();
       }

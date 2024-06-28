@@ -1,7 +1,7 @@
 "use client";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useLoginModal from "../../../app/hooks/useLoginModal";
 import { useState } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import Modal from "./Modal";
@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import Button from "../Button";
 import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRegisterModal from "../../../app/hooks/useRegisterModal";
 
 const LoginModal = () => {
   const router = useRouter();
@@ -45,8 +45,6 @@ const LoginModal = () => {
         toast.error(callback?.error);
       }
     });
-
-    // console.log("login successful");
   };
 
   const toggle = () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import useRentModal from "@/app/hooks/useRentModal";
+import useRentModal from "../../../app/hooks/useRentModal";
 import React, { useMemo, useState } from "react";
 import Modal from "./Modal";
 import Heading from "../Heading";
@@ -10,6 +10,10 @@ import { useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
 import dynamic from "next/dynamic";
 import Counter from "../inputs/Counter";
+import { useRouter } from "next/navigation";
+import ImageUpload from "../inputs/ImageUpload";
+import Input from "../inputs/Input";
+import toast from "react-hot-toast";
 
 const STEPS = {
   CATEGORY: 0,
@@ -23,6 +27,8 @@ const STEPS = {
 const RentModal = () => {
   const [step, setStep] = useState(STEPS.CATEGORY);
   const rentModal = useRentModal();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     handleSubmit,
@@ -51,6 +57,7 @@ const RentModal = () => {
   const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
+  const imageSrc = watch("imageSrc");
 
   const Map = useMemo(
     () =>
@@ -68,6 +75,36 @@ const RentModal = () => {
         shouldDirty: true,
         shouldTouch: true,
       });
+    }
+  };
+
+  const onSubmit = async (data) => {
+    if(step !== STEPS.PRICE){
+      return onNext();
+    }
+    setIsLoading(true);
+    // console.log("form data",JSON.stringify(data));
+    
+    try {
+      const res = await fetch("/api/listings", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      } );
+      if (res.ok) {
+        toast.success("Listing created successfully");
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
+        rentModal.onClose();
+      }
+    } catch (error) {
+      toast.error("Creating list fail");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const onBack = () => {
@@ -160,12 +197,58 @@ const RentModal = () => {
       </div>
     );
   }
+  
+  if(step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className=" flex flex-col gap-8">
+         <Heading title="Upload your image"
+         subtitle="Help your guest discover" />
+         <ImageUpload value={imageSrc} onChange={(value) => setCustomValue("imageSrc", value)} />
+      </div>
+    )
+  };
 
+  if(step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className=" flex flex-col gap-8">
+        <Heading title="How would you define your place?"
+         subtitle="Describe your place" />
+         <Input id="title"
+         label="Title"
+         disabled={isLoading}
+         register={register} 
+         errors={errors}
+         required/>
+         <Input id="description"
+         label="Description"
+         disabled={isLoading}
+         register={register} 
+         errors={errors}
+         required/>
+      </div>
+    )
+  }
+
+  if(step === STEPS.PRICE) {
+    bodyContent = (
+      <div className=" flex flex-col gap-8">
+        <Heading title="Add a price to your place"
+        subtitle="How much do you charge per night?" />
+        <Input id="price"
+        label="Price"
+        formatPrice
+        register={register}
+        errors={errors}
+        required
+         />
+      </div>
+    )
+  }
   return (
     <Modal
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       actionLabel={actionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       secondaryActionLabel={secondaryActionLabel}

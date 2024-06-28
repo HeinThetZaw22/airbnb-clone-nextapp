@@ -1,8 +1,8 @@
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "@/models/user";
-import { connectToDB } from "@/lib/database";
+import User from "../../../../models/user";
+import { connectToDB } from "../../../../lib/database";
 import NextAuth from "next-auth";
 import bcrypt from "bcryptjs";
 export const options = {

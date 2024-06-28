@@ -3,10 +3,10 @@ import { AiOutlineMenu } from "react-icons/ai";
 import Avator from "../Avator";
 import { useCallback, useRef, useState, useEffect } from "react";
 import MenuItem from "./MenuItem";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
-import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "../../../app/hooks/useRegisterModal";
+import useLoginModal from "../../../app/hooks/useLoginModal";
 import { signOut } from "next-auth/react";
-import useRentModal from "@/app/hooks/useRentModal";
+import useRentModal from "../../../app/hooks/useRentModal";
 
 const UserMenu = ({ currentUser }) => {
   const registerModal = useRegisterModal();

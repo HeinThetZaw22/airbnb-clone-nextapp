@@ -1,5 +1,4 @@
-import React from "react";
-
+"use client";
 const CategoryInput = ({ selected, icon: Icon, onClick, label }) => {
   return (
     <div

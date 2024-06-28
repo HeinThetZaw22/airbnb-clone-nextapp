@@ -1,5 +1,6 @@
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import "@uploadthing/react/styles.css";
 import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientOnly";
 import RegisterModal from "./components/modals/RegisterModal";
@@ -21,7 +22,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${nunito.className}`}>
-        <Provider>
+        
           <ClientOnly>
             <ToasterProvider />
             <RegisterModal />
@@ -29,9 +30,12 @@ export default async function RootLayout({ children }) {
             <RentModal />
             <Navbar currentUser={currentUser} />
           </ClientOnly>
+         <div className=" pt-48 pb-20">
           {children}
-        </Provider>
+         </div>
       </body>
     </html>
   );
 }
+
+//deleted Provider if in case any error
