@@ -94,6 +94,7 @@ const RentModal = () => {
         body: JSON.stringify(data),
       } );
       if (res.ok) {
+        // console.log("listing",res);
         toast.success("Listing created successfully");
         router.refresh();
         reset();

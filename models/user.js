@@ -13,6 +13,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  favoriteIds: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Listing',
+  }],
+  
 });
 
 const User = models?.User || model("User", userSchema);

@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { connectToDB } from "../../../lib/database";
 import Listing from "../../../models/listing";
 import getCurrentUser from "../../action/getCurrentUser";
+import mongoose, { Types } from "mongoose";
 
 export async function POST(request) {
   const currentUser = await getCurrentUser();
+  console.log(currentUser);
   if(!currentUser){
     return NextResponse.error();
   }
@@ -12,7 +14,9 @@ export async function POST(request) {
   const body = await request.json();
   console.log("received data",body);
 
-  const {title, description,
+  const {
+    title,
+    description,
     imageSrc,
     category,
     roomCount,
@@ -21,17 +25,11 @@ export async function POST(request) {
     location,
     price,
   } = body;
-  
-  if (!location || !location.value) {
-    return new Response(JSON.stringify({ message: 'Location value is missing' }), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json' }
-    });
-  }
 
   try {
     await connectToDB();
     const newListing = new Listing({
+      id: currentUser.id,
       title, 
       description,
       imageSrc,
@@ -41,12 +39,16 @@ export async function POST(request) {
       guestCount,
       location,
       price,
-      userId: currentUser._id,
+      user: {
+        id: new mongoose.Types.ObjectId(currentUser?.id),
+        name: currentUser?.name,
+        email: currentUser?.email,
+      }
     
     });
     await newListing.save();
-    // const plainObject = JSON.parse(JSON.stringify(newListing));
     const serializedListing = newListing.toObject({getters: true});
+    console.log(serializedListing);
     return new Response(JSON.stringify({ message: 'Listing created successfully', listing: serializedListing }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' }

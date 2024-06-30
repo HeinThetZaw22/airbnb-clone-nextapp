@@ -1,4 +1,4 @@
-import { model, models, Schema } from "mongoose";
+import mongoose, { model, models, Schema, Types } from "mongoose";
 
 const listingSchema = new Schema({
   title: {
@@ -40,9 +40,19 @@ const listingSchema = new Schema({
     type: Number,
     required: true,
   },
-  userId: {
-    type: String,
-  }
+  user: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    }
+  },
+  favoriteIds: [String],
 }, {timestamps : true});
 
 const Listing = models?.Listing || model("Listing", listingSchema);

@@ -20,6 +20,7 @@ const RegisterModal = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -56,6 +57,7 @@ const RegisterModal = () => {
       if (res.ok) {
         toast.success("Registed successfully");
         console.log("successfully registered");
+        reset();
         registerModal.onClose();
       }
     } catch (error) {
