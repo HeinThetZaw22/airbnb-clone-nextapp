@@ -9,7 +9,6 @@ const ListingCategory = ({icon: Icon, label, description}) => {
                 <div className=" text-neutral-500 font-light">{description}</div>
             </div>
          </div>
-         <hr />
     </div>
   )
 }

@@ -8,7 +8,7 @@ import HeartButton from "../HeartButton";
 const ListingHead = ({title, id, locationValue, imageSrc, currentUser}) => {
   const {getByValue} = useCountries();
   const location = getByValue(locationValue);
-  console.log(id);
+  // console.log(id);
   return (
     <>
      <Heading title={title}

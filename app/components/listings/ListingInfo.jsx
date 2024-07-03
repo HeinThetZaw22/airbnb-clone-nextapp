@@ -1,5 +1,8 @@
+import dynamic from "next/dynamic";
 import useCountries from "../../hooks/useCountry"
 import Avator from "../Avator";
+import ListingCategory from "./ListingCategory";
+import { useEffect, useMemo, useState } from "react";
 
 const ListingInfo = ({
     currentUser,
@@ -11,10 +14,19 @@ const ListingInfo = ({
     bathroomCount,
     locationValue
 }) => {
-    // console.log(currentUser);
-    const {getByValue} = useCountries();
+
+    const { getByValue } = useCountries();
     const location = getByValue(locationValue);
-    // console.log(location)
+    const coordinate = location?.latlng;
+    // console.log(coordinate)
+
+    const Map = useMemo(
+        () =>
+            dynamic(() => import("../Map"), {
+                ssr: false,
+            }),
+        [location]
+    );
     return (
         <div className=" flex flex-col gap-8">
             <div className="flex flex-col gap-2">
@@ -35,6 +47,18 @@ const ListingInfo = ({
                 </div>
             </div>
             <hr />
+
+            {category && (
+                <ListingCategory icon={category.icon}
+                    label={category.label}
+                    description={category.description} />
+            )}
+            <hr />
+            <div className="text-lg font-light text-neutral-500">
+                {description}
+            </div>
+            <hr />
+            <Map center={coordinate} />
         </div>
     )
 }
