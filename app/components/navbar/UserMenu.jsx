@@ -57,7 +57,7 @@ const UserMenu = ({ currentUser }) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avator className="w-auto h-auto" />
+            <Avator className="w-auto h-auto" currentUser={currentUser} />
           </div>
         </div>
         {isOpen && (
@@ -69,10 +69,13 @@ const UserMenu = ({ currentUser }) => {
                   <MenuItem onClick={() => {}} label="My favourites" />
                   <MenuItem onClick={() => {}} label="My properties" />
                   <MenuItem onClick={() => router.push("/reservations")} label="My reservations" />
+                  <hr />
+                  <MenuItem onClick={() => router.push("/account")} label="Account" />
                   <MenuItem
                     onClick={rentModal.onOpen}
                     label="Airbnb your home"
                   />
+                  <hr />
                   <MenuItem onClick={() => signOut()} label="Logout" />
                 </>
               ) : (

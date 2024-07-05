@@ -7,6 +7,7 @@ import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 
 const ReservationClient = ({reservations, currentUser}) => {
+  // console.log("reservatio client", reservations);
   const router = useRouter();
   const [deletingId, setDeletingId] = useState('');
 

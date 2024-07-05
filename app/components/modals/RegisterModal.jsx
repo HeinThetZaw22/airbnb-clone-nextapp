@@ -46,6 +46,7 @@ const RegisterModal = () => {
         console.log("successfully registered");
         reset();
         registerModal.onClose();
+        loginModal.onOpen();
       }
     } catch (error) {
       console.log(error);

@@ -12,6 +12,17 @@ const useFavorite = ({ listingId, currentUser }) => {
     return list.includes(listingId);
   });
 
+  // const [hasFavorited, setHasFavorited] = useState(() => {
+  //   return currentUser?.favoriteIds?.includes(listingId) || false; // Check if listingId exists in favoriteIds
+  // });
+
+  // Update hasFavorited if currentUser changes
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     setHasFavorited(currentUser.favoriteIds?.includes(listingId) || false);
+  //   }
+  // }, [currentUser, listingId]);
+
   // useEffect(() => {
   //   setHasFavorited(currentUser?.favoriteIds.includes(listingId));
   // }, [currentUser, listingId]);

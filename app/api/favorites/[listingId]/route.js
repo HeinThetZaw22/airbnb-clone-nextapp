@@ -52,19 +52,27 @@ export async function DELETE(request, { params }) {
         throw new Error("Invalid Id");
     }
 
-    console.log('Current User:', currentUser);
-    console.log('Listing ID:', listingId);
+    // console.log('Current User:', currentUser);
+    // console.log('Listing ID:', listingId);
+
+    // let userFavoriteIds = [...(currentUser.favoriteIds || [])];
+    // console.log("current fav id", userFavoriteIds);
+
+    // currentUser.favoriteIds = currentUser.favoriteIds.filter(id=> id!== listingId);
+    // await connectToDB();
+
+    // userFavoriteIds = userFavoriteIds.filter(id => id !== listingId);
+    // console.log("updated fav ids", userFavoriteIds);
+
+    // const updatedUser = await User.findByIdAndUpdate(currentUser.id, currentUser, { new: true });
 
 
-    let userFavoriteIds = [...(currentUser.favoriteIds || [])];
-    console.log("current fav id", userFavoriteIds);
+    const filteredFavoriteIds = currentUser.favoriteIds.filter(id => id !== listingId);
 
     await connectToDB();
-
-    userFavoriteIds = userFavoriteIds.filter(id => id !== listingId);
-    console.log("updated fav ids", userFavoriteIds);
+  
     const updatedUser = await User.findByIdAndUpdate(currentUser.id, {
-        favoriteIds: userFavoriteIds
+      favoriteIds: filteredFavoriteIds
     }, { new: true });
 
     if (!updatedUser) {

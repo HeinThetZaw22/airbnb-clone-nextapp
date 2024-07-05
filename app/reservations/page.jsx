@@ -19,7 +19,6 @@ const ReservationPage = async () => {
         authorId: currentUser.id
     })
 
-    // console.log("get my reservation",reservations);
     if (reservations.length === 0) {
         return (
             <ClientOnly>
@@ -29,15 +28,12 @@ const ReservationPage = async () => {
         )
     }
 
-
     // Convert reservations to plain objects
     const plainReservations = reservations.map(reservation => ({
         ...reservation.toObject(),
         listing: reservation.listingId.toObject(),
         listingId: reservation.listingId._id.toString(),
     }));
-
-    // console.log("plainReservation", plainReservations);
 
     return (
         <ClientOnly>
