@@ -33,19 +33,6 @@ const RegisterModal = () => {
     // console.log("onSubmit fun");
     setIsLoading(true);
     try {
-      // later for checking user already exist
-      // const resuserExist = await fetch("/api/userExist", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      //   body: JSON.stringify(data.email),
-      // });
-
-      // const { userExist } = await resuserExist.json();
-      // if (userExist) {
-
-      // }
 
       const res = await fetch("api/register", {
         method: "POST",

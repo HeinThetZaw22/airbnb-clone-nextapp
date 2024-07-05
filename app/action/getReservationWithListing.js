@@ -16,16 +16,23 @@ export default async function getReservation(params) {
         query.userId = userId;
     }
 
-    //all reservations that other users made for our propetry
+    //all reservations that other users made for our listing
     if(authorId) {
+        // query.listingId = {userId: authorId};
         query.listing = {userId: authorId};
     }
 
     await connectToDB();
-    const reservations = await Reservation.find(query).sort({ createdAt: -1 });
+    // const reservations = await Reservation.find(query).sort({ createdAt: -1 });
+
+
+    // Find reservations for the user and populate listing details
+    const reservations = await Reservation.find(query).populate('listingId');
+
 
     return reservations;
     } catch (error) {
+        console.log(error);
         throw new Error(error);
     }
 

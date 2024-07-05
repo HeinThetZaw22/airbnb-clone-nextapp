@@ -6,7 +6,7 @@ const HeartButton = ({listingId, currentUser}) => {
   // console.log(listingId, currentUser)
   const { hasFavorited, toggleFavorite} = useFavorite({listingId, currentUser});
  
-  // console.log(hasFavorited);
+  console.log(hasFavorited);
   return (
     <div onClick={toggleFavorite} 
     className=" relative cursor-pointer hover:opacity-80">

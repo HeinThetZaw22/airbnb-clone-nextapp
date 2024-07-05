@@ -43,7 +43,7 @@ const ListingInfo = ({
             <div className="flex flex-row items-center gap-4">
                 <div><Avator /></div>
                 <div className="flex flex-col gap-2 font-light">
-                    <div>Hosted by {user?.name}</div>
+                    <div>Hosted by <span className=" font-semibold">{user?.name}</span></div>
                 </div>
             </div>
             <hr />

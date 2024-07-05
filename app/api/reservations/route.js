@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import getCurrentUser from '../../action/getCurrentUser'
 import { connectToDB } from '../../../lib/database';
 import Reservation from '../../../models/reservation';
+import Listing from '../../../models/listing'
+
 
 export async function POST(request) {
     const currentUser = await getCurrentUser();
@@ -24,6 +26,12 @@ export async function POST(request) {
         });
         console.log(newReservation);
         await newReservation.save();
+
+        //also update listing to include new reservation
+        await Listing.findByIdAndUpdate(listingId, {
+            $push: {reservations: newReservation._id}
+        });
+        
         return NextResponse.json(newReservation, { status: 201 })
     } catch (error) {
         console.error('reservation error:', error);

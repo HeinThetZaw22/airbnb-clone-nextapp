@@ -53,6 +53,10 @@ const listingSchema = new Schema({
     }
   },
   favoriteIds: [String],
+  reservations: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Reservation',
+  }]
 }, {timestamps : true});
 
 const Listing = models?.Listing || model("Listing", listingSchema);
