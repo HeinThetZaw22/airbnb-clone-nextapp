@@ -1,5 +1,4 @@
-import React from "react";
-
+"use client";
 const Button = ({ label, onClick, disabled, Icon, small, outline }) => {
   return (
     <button

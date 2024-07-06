@@ -7,6 +7,9 @@ const HeartButton = ({listingId, currentUser}) => {
   const { hasFavorited, toggleFavorite} = useFavorite({listingId, currentUser});
  
   console.log(hasFavorited);
+  // if(hasFavorited === undefined){
+  //   return null;
+  // }
   return (
     <div onClick={toggleFavorite} 
     className=" relative cursor-pointer hover:opacity-80">

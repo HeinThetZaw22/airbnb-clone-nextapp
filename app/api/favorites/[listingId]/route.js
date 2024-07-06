@@ -13,29 +13,25 @@ export async function POST(request, { params }) {
         throw new Error("Invalid Id");
     }
 
-
-    // Update User's favoriteIds
-    let userFavoriteIds = [...(currentUser.favoriteIds || [])];
-    if (!userFavoriteIds.includes(listingId)) {
-        userFavoriteIds.push(listingId);
+    let favoriteIds = [...(currentUser.favoriteIds || [])];
+    if (!favoriteIds.includes(listingId)) {
+        favoriteIds.push(listingId);
     }
 
     await connectToDB();
 
-    const updatedUser = await User.findByIdAndUpdate(currentUser.id, {
-        favoriteIds: userFavoriteIds
-    }, { new: true });
+    const user = await User.findByIdAndUpdate(currentUser.id, {
+        favoriteIds
+    });
 
-    if (!updatedUser) {
+    if (!user) {
         return NextResponse.json({
             error: "Update failed"
         }, { status: 500 });
     }
 
-    console.log("POST: update id", updatedUser.favoriteIds);
-
     return NextResponse.json({
-        user: updatedUser,
+        user
     });
 }
 
@@ -52,34 +48,24 @@ export async function DELETE(request, { params }) {
         throw new Error("Invalid Id");
     }
 
-    // console.log('Current User:', currentUser);
-    // console.log('Listing ID:', listingId);
-
-    // let userFavoriteIds = [...(currentUser.favoriteIds || [])];
-    // console.log("current fav id", userFavoriteIds);
-
-    // currentUser.favoriteIds = currentUser.favoriteIds.filter(id=> id!== listingId);
+    // let favoriteIds = [...(currentUser.favoriteIds || [])];
+    // favoriteIds = favoriteIds.filter((id) => id !== listingId);
     // await connectToDB();
 
-    // userFavoriteIds = userFavoriteIds.filter(id => id !== listingId);
-    // console.log("updated fav ids", userFavoriteIds);
+    // const user = await User.findByIdAndUpdate(currentUser.id, favoriteIds, {new: true});
 
-    // const updatedUser = await User.findByIdAndUpdate(currentUser.id, currentUser, { new: true });
+    // if (!user) {
+    //     return NextResponse.json({ error: "Update failed" }, { status: 500 });
+    // }
 
-
-    const filteredFavoriteIds = currentUser.favoriteIds.filter(id => id !== listingId);
-
+    // console.log("current.id", currentUser.id);
     await connectToDB();
-  
-    const updatedUser = await User.findByIdAndUpdate(currentUser.id, {
-      favoriteIds: filteredFavoriteIds
-    }, { new: true });
+    const user = await User.findOne({id: currentUser.id});
+    console.log("user", user);
+    const updatedFavoriteIds = user.favoriteIds.filter((id) => id !== listingId);
+    user.favoriteIds = updatedFavoriteIds;
+    await user.save();
+    // await User.updateOne({_id: currentUser._id}, {$set: {favoriteIds: updatedFavoriteIds}});
 
-    if (!updatedUser) {
-        return NextResponse.json({ error: "Update failed" }, { status: 500 });
-    }
-
-    console.log("DELETE: updated ids", updatedUser.favoriteIds);
-
-    return NextResponse.json({ user: updatedUser });
+    return NextResponse.json({ message: "Listing deleted from favorites"});
 }

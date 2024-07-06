@@ -6,8 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const TripsClient = ({ reservations, currentUser }) => {
-  // console.log(reservations);
+const PropertiesClient = ({ listings, currentUser }) => {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState('');
 
@@ -15,14 +14,14 @@ const TripsClient = ({ reservations, currentUser }) => {
     setDeletingId(id);
 
     try {
-      const res = await fetch(`/api/reservations/${id}`,{
+      const res = await fetch(`/api/listings/${id}`,{
         method: 'DELETE',
         headers: {
           "Content-Type": "application/json",
         }
       })
       if(res.ok){
-        toast.success("Reservation cancelled");
+        toast.success("Listing deleted");
         router.refresh();
       }
     } catch (error) {
@@ -37,19 +36,18 @@ const TripsClient = ({ reservations, currentUser }) => {
   return (
     <Container>
       <Heading
-      title="Your Trips"
-      subtitle="Places that you have reserved" />
+      title="Properties"
+      subtitle="Lists of your properties" />
       <div className=" pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {reservations.map(reservation => {
+        {listings.map(listing => {
           return (
             <ListingCard
-              key={reservation._id}
-              data={reservation.listing}
-              reservation={reservation}
+              key={listing.id}
+              data={listing}
               currentUser={currentUser}
-              disabled={deletingId === reservation._id}
+              disabled={deletingId === listing.id}
               actionLabel="Cancel reservation"
-              actionId={reservation._id}
+              actionId={listing.id}
               onAction={onCancel}
             />
           );
@@ -59,4 +57,4 @@ const TripsClient = ({ reservations, currentUser }) => {
   );
 };
 
-export default TripsClient;
+export default PropertiesClient;
