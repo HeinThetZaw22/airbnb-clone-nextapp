@@ -42,12 +42,12 @@ const PropertiesClient = ({ listings, currentUser }) => {
         {listings.map(listing => {
           return (
             <ListingCard
-              key={listing.id}
+              key={listing._id}
               data={listing}
               currentUser={currentUser}
-              disabled={deletingId === listing.id}
-              actionLabel="Cancel reservation"
-              actionId={listing.id}
+              disabled={deletingId === listing._id}
+              actionLabel="Delete Property"
+              actionId={listing._id}
               onAction={onCancel}
             />
           );

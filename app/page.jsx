@@ -6,8 +6,9 @@ import ListingCard from './components/listings/ListingCard';
 import getCurrentUser from "./action/getCurrentUser";
 
 
-export default async function Home() {
-  const listings = await getListings();
+const Home = async ({searchParams}) => {
+  console.log("search params", searchParams)
+  const listings = await getListings({params: searchParams});
   const currentUser = await getCurrentUser();
   if(listings.length === 0){
     return(
@@ -16,6 +17,15 @@ export default async function Home() {
       </ClientOnly>
     )
   }
+
+  const simulateRandomError = () => {
+    if (Math.random() < 0.5) {
+      throw new Error('Random error occurred');
+    }
+  };
+
+  // Call this function somewhere in your component to simulate random errors
+  simulateRandomError();
   return (
      <ClientOnly>
       <Container>
@@ -34,3 +44,5 @@ export default async function Home() {
      </ClientOnly>
   );
 }
+
+export default Home

@@ -21,8 +21,8 @@ const PropertyPage = async () => {
     if(listings.length === 0){
         return (
             <ClientOnly>
-                <EmptyState title='No trips found'
-                subtitle="Looks like you haven't reserved any  trips " />
+                <EmptyState title='No Properties found'
+                subtitle="Looks like you haven't airbnb your property " />
             </ClientOnly>
         )
     }

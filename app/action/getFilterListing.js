@@ -1,17 +1,16 @@
 import { connectToDB } from '../../lib/database';
 import Listing from '../../models/listing';
 
-export default async function getListings({params} = {}){
+export default async function getFilterListings({params}){
     try {
         const {
             userId,
             guestCount,
             roomCount,
             bathroomCount,
-            category,
-            locationValue
-        } = params || {};
-        let query = {};
+            category
+        } = params;
+        let query = [];
         if(userId){
             query.userId = userId;
         }
@@ -20,27 +19,23 @@ export default async function getListings({params} = {}){
         }
         if(guestCount) {
             query.guestCount = {
-                $gte: parseInt(guestCount, 10)
+                gte: +guestCount
             }
         }
         if(roomCount) {
             query.roomCount = {
-                $gte: parseInt(roomCount, 10)
+                gte: +roomCount
             }
         }
         if(bathroomCount) {
             query.bathroomCount = {
-                $gte: parseInt(bathroomCount, 10)
+                gte: +bathroomCount
             }
         }
         if(locationValue) {
-            query['location.value'] = locationValue
+            query.locationValue = locationValue
         }
         //dataRange handle
-
-         // Log query for debugging
-         console.log('Constructed Query:', JSON.stringify(query, null, 2));
-
 
          //when you try to access model before database connection, buffer error occur
         await connectToDB();
@@ -48,6 +43,6 @@ export default async function getListings({params} = {}){
 
         return listings;
     } catch (error) {
-        throw new Error(error.message);
+        throw new Error(error);
     }
 }

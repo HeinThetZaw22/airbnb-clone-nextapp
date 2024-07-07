@@ -7,8 +7,12 @@ const EmptyState = ({
     title = "No exact matches",
     subtitle = "Try changing or removing some of your filters",
     showReset,
+    error
 }) => {
     const router = useRouter();
+    const handleRefresh = () => {
+        window.location.reload();
+    }
   return (
     <div className=" h-[60vh] flex flex-col gap-2 items-center justify-center">
         <Heading title={title} subtitle={subtitle} center />
@@ -18,6 +22,14 @@ const EmptyState = ({
                 onClick={() => router.push("/") } />
             )}
         </div>
+        <div className="mt-2">
+                <button
+                    onClick={handleRefresh}
+                    className="px-4 py-2 border-2 border-neutral-400 rounded-md"
+                >
+                    Try again
+                </button>
+            </div>
     </div>
   )
 }

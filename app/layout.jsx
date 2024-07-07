@@ -9,7 +9,7 @@ import LoginModal from "./components/modals/LoginModal";
 import Provider from "./components/Provider";
 import getCurrentUser from "./action/getCurrentUser";
 import RentModal from "./components/modals/RentModal";
-
+import SearchModal from './components/modals/SearchModal'
 const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata = {
@@ -28,6 +28,7 @@ export default async function RootLayout({ children }) {
             <RegisterModal />
             <LoginModal />
             <RentModal />
+            <SearchModal />
             <Navbar currentUser={currentUser} />
           </ClientOnly>
          <div className="pt-28 pb-20">
