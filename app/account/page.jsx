@@ -13,7 +13,7 @@ const page = async () => {
             <Container>
                 <div className=" max-w-[2520px] flex flex-col sm:items-center">
                     <div className=" flex flex-row items-center gap-5">
-                        <div className="md:hidden p-3 bg-neutral-400 rounded-full">
+                        <div className="md:hidden bg-neutral-400 rounded-full">
                         <Avator currentUser={currentUser} />
                         </div>
                     <div>

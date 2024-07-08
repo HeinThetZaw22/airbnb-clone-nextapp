@@ -7,7 +7,6 @@ import getCurrentUser from "./action/getCurrentUser";
 
 
 const Home = async ({searchParams}) => {
-  console.log("search params", searchParams)
   const listings = await getListings({params: searchParams});
   const currentUser = await getCurrentUser();
   if(listings.length === 0){
@@ -18,14 +17,6 @@ const Home = async ({searchParams}) => {
     )
   }
 
-  const simulateRandomError = () => {
-    if (Math.random() < 0.5) {
-      throw new Error('Random error occurred');
-    }
-  };
-
-  // Call this function somewhere in your component to simulate random errors
-  simulateRandomError();
   return (
      <ClientOnly>
       <Container>

@@ -38,10 +38,6 @@ export default async function getListings({params} = {}){
         }
         //dataRange handle
 
-         // Log query for debugging
-         console.log('Constructed Query:', JSON.stringify(query, null, 2));
-
-
          //when you try to access model before database connection, buffer error occur
         await connectToDB();
         const listings = await Listing.find(query).sort({ createdAt: -1 });
