@@ -51,7 +51,7 @@ const FooterContent = () => {
                      <FaInstagramSquare />
                   </div>
                 </div>
-                <div className='font-light tracking-tighter text-sm text-neutral-500 flex flex-row gap-2'>
+                <div className='font-light  text-sm text-neutral-500 flex flex-row gap-2'>
                   <p>@ 2024 RentBurma, Inc.</p>
                   <p>Terms . Sitemap . Privacy</p>
                 </div>

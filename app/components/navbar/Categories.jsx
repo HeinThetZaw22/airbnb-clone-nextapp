@@ -10,8 +10,10 @@ import {
   GiForestCamp,
   GiCactus,
   GiBarn,
+  GiPalmTree,
 } from "react-icons/gi";
-import { IoDiamond } from "react-icons/io5";
+import { PiShippingContainerBold } from 'react-icons/pi'
+import { IoBoatOutline, IoDiamond, IoFlame } from "react-icons/io5";
 import { BsSnow } from "react-icons/bs";
 import { FaSkiing } from "react-icons/fa";
 import { MdOutlineVilla } from "react-icons/md";
@@ -94,6 +96,26 @@ export const categories = [
     icon: IoDiamond,
     description: "This is close to the Snow",
   },
+  {
+    label: "Container",
+    icon: PiShippingContainerBold,
+    description: "This is container house"
+  },
+  {
+    label: "House Boat",
+    icon: IoBoatOutline,
+    description: "This is house inside a boat"
+  },
+  {
+    label: "Camping",
+    icon: IoFlame,
+    description: "This is trending house"
+  },
+  {
+    label: "Tropical",
+    icon: GiPalmTree,
+    description: "This is tropical region"
+  }
 ];
 
 const Categories = () => {
@@ -108,7 +130,7 @@ const Categories = () => {
   }
   return (
     <Container>
-      <div className=" pt-4 flex flex-row justify-between items-center overflow-x-auto">
+      <div className=" pt-4 flex gap-4 scroll-smooth flex-row justify-between items-center overflow-x-auto">
         {categories.map((item) => (
           <CategoryBox
             key={item.label}
