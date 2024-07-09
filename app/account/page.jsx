@@ -1,15 +1,23 @@
 import { AiFillEdit, AiFillSafetyCertificate, AiFillTikTok, AiOutlineAlipay, AiOutlineNotification } from "react-icons/ai";
 import getCurrentUser from "../action/getCurrentUser"
-import ClientOnly from "../components/ClientOnly";
 import Container from "../components/Container";
 import ProfileCard from '../components/ProfileCard'
 import { GiPayMoney, GiTravelDress } from "react-icons/gi";
 import Avator from "../components/Avator";
+import EmptyState from "../components/EmptyState";
+export const dynamic = 'force-dynamic';
 
 const page = async () => {
     const currentUser = await getCurrentUser();
+
+    if(!currentUser) {
+        return (
+            <EmptyState title="Unauthorized"
+            subtitle="Please login" />
+        )
+    }
     return (
-        <ClientOnly>
+        
             <Container>
                 <div className=" max-w-[2520px] flex flex-col sm:items-center">
                     <div className=" flex flex-row items-center gap-5">
@@ -42,7 +50,7 @@ const page = async () => {
                     </div>
                 </div>
             </Container>
-        </ClientOnly>
+        
     )
 }
 

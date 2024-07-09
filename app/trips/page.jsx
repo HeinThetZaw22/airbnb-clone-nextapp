@@ -4,16 +4,18 @@ import getReservationWithListing from '../action/getReservationWithListing'
 import ClientOnly from '../components/ClientOnly';
 import EmptyState from '../components/EmptyState'
 import TripsClient from './TripsClient';
+export const dynamic = 'force-dynamic';
+
 const TripPage = async () => {
     const currentUser = await getCurrentUser();
 
 
     if(!currentUser){
         return (
-            <ClientOnly>
+            
                 <EmptyState title='Unauthorized'
                 subtitle='Please login' />
-            </ClientOnly>
+      
         )
     }
 
@@ -23,10 +25,10 @@ const TripPage = async () => {
 
     if(reservations.length === 0){
         return (
-            <ClientOnly>
+           
                 <EmptyState title='No trips found'
                 subtitle="Looks like you haven't reserved any  trips " />
-            </ClientOnly>
+           
         )
     }
 
@@ -38,12 +40,12 @@ const TripPage = async () => {
     }));
 
   return (
-    <ClientOnly>
+   
         <TripsClient 
         reservations={plainReservations}
         currentUser={currentUser}>
         </TripsClient>
-    </ClientOnly>
+  
   )
 }
 

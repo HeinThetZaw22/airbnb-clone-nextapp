@@ -3,15 +3,18 @@ import getReservationWithListing from '../action/getReservationWithListing';
 import ClientOnly from '../components/ClientOnly';
 import EmptyState from '../components/EmptyState'
 import ReservationClient from '../reservations/ReservationClient'
+
+export const dynamic = 'force-dynamic';
+
 const ReservationPage = async () => {
 
     const currentUser = await getCurrentUser();
     if (!currentUser) {
         return (
-            <ClientOnly>
+          
                 <EmptyState title='Unauthorized'
                     subtitle='Please login' />
-            </ClientOnly>
+          
         )
     }
 
@@ -21,10 +24,10 @@ const ReservationPage = async () => {
 
     if (reservations.length === 0) {
         return (
-            <ClientOnly>
+         
                 <EmptyState title='No reservations found'
                     subtitle="Looks like you have no reservations on your propeties " />
-            </ClientOnly>
+          
         )
     }
 
@@ -36,10 +39,10 @@ const ReservationPage = async () => {
     }));
 
     return (
-        <ClientOnly>
+        
             <ReservationClient reservations={plainReservations}
             currentUser={currentUser} />
-        </ClientOnly>
+      
     )
 }
 

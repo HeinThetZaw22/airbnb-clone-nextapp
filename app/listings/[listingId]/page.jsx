@@ -17,18 +17,18 @@ const page = async ({ params }) => {
 
   if (!listing) {
     return (
-      <ClientOnly>
+      
         <EmptyState />
-      </ClientOnly>
+      
     )
   }
   return (
-    <ClientOnly>
+    
         <ListingClient 
         listing={listing} 
         currentUser={currentUser}
         reservations={reservations} />
-    </ClientOnly>
+   
   )
 }
 

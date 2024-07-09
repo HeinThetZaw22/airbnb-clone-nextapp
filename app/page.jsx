@@ -4,6 +4,7 @@ import EmptyState from "./components/EmptyState";
 import getListings from './action/getListings';
 import ListingCard from './components/listings/ListingCard';
 import getCurrentUser from "./action/getCurrentUser";
+export const dynamic = 'force-dynamic';
 
 
 const Home = async ({searchParams}) => {

@@ -45,9 +45,6 @@ const ListingClient = ({ listing, currentUser, reservations = [] }) => {
         try {
             const res = await fetch("/api/reservations", {
                 method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                },
                 body: JSON.stringify({
                     totalPrice,
                     startDate: dateRange.startDate,

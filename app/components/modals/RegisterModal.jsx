@@ -36,9 +36,9 @@ const RegisterModal = () => {
 
       const res = await fetch("api/register", {
         method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
+        // headers: {
+        //   "Content-type": "application/json",
+        // },
         body: JSON.stringify(data),
       });
       if (res.ok) {

@@ -17,9 +17,6 @@ const ReservationClient = ({reservations, currentUser}) => {
     try {
       const res = await fetch(`/api/reservations/${id}`,{
         method: 'DELETE',
-        headers: {
-          "Content-Type": "application/json",
-        }
       })
       if(res.ok){
         toast.success("Reservation cancelled");

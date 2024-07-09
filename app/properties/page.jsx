@@ -3,16 +3,18 @@ import  getProperties from '../action/getProperties';
 import ClientOnly from '../components/ClientOnly';
 import EmptyState from '../components/EmptyState'
 import PropertiesClient from './PropertiesClient';
+export const dynamic = 'force-dynamic';
+
 const PropertyPage = async () => {
     const currentUser = await getCurrentUser();
 
 
     if(!currentUser){
         return (
-            <ClientOnly>
+            
                 <EmptyState title='Unauthorized'
                 subtitle='Please login' />
-            </ClientOnly>
+            
         )
     }
 
@@ -20,10 +22,10 @@ const PropertyPage = async () => {
 
     if(listings.length === 0){
         return (
-            <ClientOnly>
+            
                 <EmptyState title='No Properties found'
                 subtitle="Looks like you haven't airbnb your property " />
-            </ClientOnly>
+
         )
     }
 
@@ -34,12 +36,12 @@ const PropertyPage = async () => {
     // }));
 
   return (
-    <ClientOnly>
+   
         <PropertiesClient 
         listings={listings}
         currentUser={currentUser}>
         </PropertiesClient>
-    </ClientOnly>
+    
   )
 }
 

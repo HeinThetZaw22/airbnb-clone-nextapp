@@ -16,9 +16,6 @@ const PropertiesClient = ({ listings, currentUser }) => {
     try {
       const res = await fetch(`/api/listings/${id}`,{
         method: 'DELETE',
-        headers: {
-          "Content-Type": "application/json",
-        }
       })
       if(res.ok){
         toast.success("Listing deleted");
