@@ -59,62 +59,62 @@ export const options = {
       },
     }),
   ],
-  callbacks: {
-    //sign in or create new user
-    async signIn({ profile }) {
-      try {
-        // console.log("start to db connect");
-        await connectToDB();
-        const UserExist = await User.findOne({
-          email: profile.email,
-        });
-        if (!UserExist) {
-          await User.create({
-            email: profile.email,
-            username: profile.name.replace(" ", "").toLowerCase(),
-            image: profile.picture,
-          });
-        }
-        return true;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  },
-
   // callbacks: {
-  //   async signIn({ user, account, profile, email, credentials }) {
-  //     await connectToDB();
-  //     if (account.provider === "google") {
-  //       const existingUser = await User.findOne({ email: profile.email });
-  //       if (!existingUser) {
+  //   //sign in or create new user
+  //   async signIn({ profile }) {
+  //     try {
+  //       // console.log("start to db connect");
+  //       await connectToDB();
+  //       const UserExist = await User.findOne({
+  //         email: profile.email,
+  //       });
+  //       if (!UserExist) {
   //         await User.create({
   //           email: profile.email,
-  //           name: profile.name,
-  //           image: profile.picture || profile.picture_url, // Use appropriate field for the picture
-  //           oauth: true,
+  //           username: profile.name.replace(" ", "").toLowerCase(),
+  //           image: profile.picture,
   //         });
-  //       } else {
-  //         // Update the existing user's image if needed
-  //         existingUser.image = profile.picture || profile.picture_url;
-  //         await existingUser.save();
   //       }
+  //       return true;
+  //     } catch (error) {
+  //       console.log(error);
   //     }
-  //     return true;
-  //   },
-  //   async jwt({ token, user, account, profile, isNewUser }) {
-  //     if (account?.provider === "github" || account?.provider === "google") {
-  //       token.picture = profile.picture || profile.avatar_url; // GitHub uses avatar_url, Google uses picture
-  //     } else if (user) {
-  //       token.picture = user.image;
-  //     }
-  //     return token;
-  //   },
-  //   async session({ session, token }) {
-  //     session.user.image = token.picture;
-  //     return session;
   //   },
   // },
+
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      await connectToDB();
+      if (account.provider === "google") {
+        const existingUser = await User.findOne({ email: profile.email });
+        if (!existingUser) {
+          await User.create({
+            email: profile.email,
+            name: profile.name,
+            image: profile.picture || profile.picture_url, // Use appropriate field for the picture
+            oauth: true,
+          });
+        } else {
+          // Update the existing user's image if needed
+          existingUser.image = profile.picture || profile.picture_url;
+          await existingUser.save();
+        }
+      }
+      return true;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (account?.provider === "github" || account?.provider === "google") {
+        token.picture = profile.picture || profile.avatar_url; // GitHub uses avatar_url, Google uses picture
+      } else if (user) {
+        token.picture = user.image;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.image = token.picture;
+      return session;
+    },
+  },
 
 
   session: {
