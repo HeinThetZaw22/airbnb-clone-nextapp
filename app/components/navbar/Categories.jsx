@@ -15,10 +15,11 @@ import {
 import { PiShippingContainerBold } from 'react-icons/pi'
 import { IoBoatOutline, IoDiamond, IoFlame } from "react-icons/io5";
 import { BsSnow } from "react-icons/bs";
-import { FaSkiing } from "react-icons/fa";
+import { FaArrowRight, FaSkiing } from "react-icons/fa";
 import { MdOutlineVilla } from "react-icons/md";
 import CategoryBox from "../CategoryBox";
 import { usePathname, useSearchParams } from "next/navigation";
+import { IoIosArrowForward } from "react-icons/io";
 
 export const categories = [
   {
@@ -130,7 +131,7 @@ const Categories = () => {
   }
   return (
     <Container>
-      <div className=" pt-4 flex gap-4 scroll-smooth flex-row justify-between items-center overflow-x-auto">
+      <div className=" relative pt-4 max-sm:pt-1 gap-1 md:gap-4 flex scroll-smooth flex-row justify-between items-center overflow-x-auto">
         {categories.map((item) => (
           <CategoryBox
             key={item.label}
@@ -139,6 +140,11 @@ const Categories = () => {
             selected={category === item.label}
           />
         ))}
+        <div className="fixed bg-white/90 right-10 rounded-2xl shadow-transparent p-4">
+        <div className="rounded-full bg-white border p-2">
+          <IoIosArrowForward />
+        </div>
+        </div>
       </div>
     </Container>
   );
