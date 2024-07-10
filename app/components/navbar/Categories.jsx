@@ -131,7 +131,7 @@ const Categories = () => {
   }
   return (
     <Container>
-      <div className=" relative pt-4 max-sm:pt-1 gap-1 md:gap-4 flex scroll-smooth flex-row justify-between items-center overflow-x-auto">
+      <div className=" pt-4 max-sm:pt-1 gap-1 md:gap-4 flex scroll-smooth flex-row justify-between items-center overflow-x-auto">
         {categories.map((item) => (
           <CategoryBox
             key={item.label}
@@ -140,11 +140,6 @@ const Categories = () => {
             selected={category === item.label}
           />
         ))}
-        <div className="fixed bg-white/90 right-10 rounded-2xl shadow-transparent p-4">
-        <div className="rounded-full bg-white border p-2">
-          <IoIosArrowForward />
-        </div>
-        </div>
       </div>
     </Container>
   );
