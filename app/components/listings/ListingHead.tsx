@@ -35,13 +35,13 @@ const ListingHead: React.FC<ListingHeadProps> = ({
            overflow-hidden 
            rounded-xl
            ">
-            <img src={imageSrc} alt='detail image' className="w-full object-cover" alt="" />
-        {/* <Image
+            {/* <img src={imageSrc} alt='detail image' className="w-full object-cover" alt="" /> */}
+        <Image
           src={imageSrc}
           fill
           alt="detail image"
           className=" w-full object-cover"
-        /> */}
+        />
         <div className="absolute top-5 right-5">
           <HeartButton
             listingId={id}

@@ -4,7 +4,6 @@ import EmptyState from "./components/EmptyState";
 import getListings, { IListingParams } from "./action/getListings";
 import ListingCard from "./components/listings/ListingCard";
 import getCurrentUser from "./action/getCurrentUser";
-import toast from "react-hot-toast";
 export const dynamic = "force-dynamic";
 
 interface HomeProps {

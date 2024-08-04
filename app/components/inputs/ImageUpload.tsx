@@ -38,12 +38,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       />
       {imageUrl.length ? (
         <div className=" flex items-center justify-center">
-          {/* <Image 
+          <Image 
           src={imageUrl} 
           width={500} 
           height={300} 
-          alt="my image" /> */}
-          <img className=" w-[500px] h-[300px]" src={imageUrl} alt="Image is loading" />
+          alt="my image" />
+          {/* <img className=" w-[500px] h-[300px]" src={imageUrl} alt="Image is loading" /> */}
         </div>
       ) : null}
     </div>

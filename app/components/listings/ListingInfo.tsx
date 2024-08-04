@@ -40,7 +40,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
       dynamic(() => import("../Map"), {
         ssr: false,
       }),
-    [location]
+    []
   );
 
   return (
