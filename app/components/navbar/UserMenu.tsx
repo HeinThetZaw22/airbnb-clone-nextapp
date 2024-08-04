@@ -59,7 +59,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         <div
           onClick={onRent}
           className="
-          hidden
+          max-md:hidden
           md:block 
           text-sm 
           font-semibold 
@@ -88,7 +88,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
           cursor-pointer
         ">
           <AiOutlineMenu />
-          <div className="hidden md:block">
+          <div className=" max-md:hidden">
             <Avator src={currentUser?.image} />
           </div>
         </div>

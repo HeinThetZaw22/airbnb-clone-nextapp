@@ -5,7 +5,6 @@ import ProfileCard from '../components/ProfileCard'
 import { GiPayMoney, GiTravelDress } from "react-icons/gi";
 import Avator from "../components/Avator";
 import EmptyState from "../components/EmptyState";
-export const dynamic = 'force-dynamic';
 
 const page = async () => {
     const currentUser = await getCurrentUser();

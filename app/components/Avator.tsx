@@ -20,7 +20,7 @@ const Avatar: React.FC<AvatorProps> = ({ src }) => {
         />
       ) : (
         <img
-          className=" rounded-full"
+          className=" size-8 rounded-full"
           src="/images/placeholder.jpg"
           alt="profile"
         />

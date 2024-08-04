@@ -6,7 +6,7 @@ const Logo = () => {
   const router = useRouter();
   return (
     <div onClick={() => router.push("/")}>
-      <img className=" w-24 hidden sm:block" src="/images/air.png" alt="logo" />
+      <img className=" w-24 max-md:hidden" src="/images/air.png" alt="logo" />
     </div>
     // <Image
     //   onClick={() => router.push("/")}

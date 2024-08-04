@@ -1,4 +1,3 @@
-const { Nunito_Sans } = require("next/font/google");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,9 +8,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // fontFamily: {
-      //   Nunito_Sans: ["Nunito Sans", "sans-serif"],
-      // },
     },
   },
   plugins: [],
