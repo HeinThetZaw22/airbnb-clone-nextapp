@@ -9,9 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        Nunito_Sans: ["Nunito Sans", "sans-serif"],
-      },
+      // fontFamily: {
+      //   Nunito_Sans: ["Nunito Sans", "sans-serif"],
+      // },
     },
   },
   plugins: [],
