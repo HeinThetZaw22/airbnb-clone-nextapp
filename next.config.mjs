@@ -20,7 +20,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "uploadthing.com",
+        hostname: "utfs.io",
+        pathname: "/a/<APP_ID>/*",
       },
     ],
   },
